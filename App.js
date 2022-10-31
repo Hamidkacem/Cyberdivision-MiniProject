@@ -72,12 +72,10 @@ function Authentification(props) {
 }
 
 export default () => {
-  const [logged, setLogged] = useState({
-    logged : false,
-    id : String
-  });
+  const [logged, setLogged] = useState(false);
   useEffect(() => {
-    let x = JSON.parse(localStorage.getItem("username"));
+    let x = localStorage.getItem("token");
+    console.log(x);
     if (x) {
       setLogged(true);
     }

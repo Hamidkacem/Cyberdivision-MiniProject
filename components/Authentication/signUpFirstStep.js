@@ -72,28 +72,25 @@ const SignUpFirstStep = ({ navigation, route }) => {
 
         <View className="flex flex-row justify-center ">
           <Text className="text-[#858585] justify-between text-lg">
-            Already have an account ?
-            <Text
+            Already have an account ? <Text
               className="text-[#04AF2F] font-bold"
               onPress={() => {
                 console.log(data);
-              }}
-            >
-              {" "}
-              Login{" "}
+              }} >
+                Login
             </Text>
           </Text>
         </View>
-        <View className="flex flex-row justify-center">
-          <Text className="text-[#858585] text-lg">
+        <View className="flex flex-row justify-center items-center">
+          <Text className="text-[#858585] text-l">
             Signup to Petnet means you agree to our
           </Text>
-          <Text className="text-[#04AF2F]  text-lg"> privacy </Text>
+          <Text className="text-[#04AF2F]  text-lg font-bold"> privacy </Text>
         </View>
         <View className="flex flex-row justify-center">
           <Text>
-            <Text className="text-[#04AF2F] underline ">polity</Text>{" "}
-            <Text className="text-[#858585] font-bold underline-none">and</Text>{" "}
+            <Text className="text-[#04AF2F] underline  font-bold">polity</Text>
+            <Text className="text-[#858585] underline-none"> and </Text>
             <Text className="text-[#04AF2F] font-bold underline ">
               Terms of services
             </Text>

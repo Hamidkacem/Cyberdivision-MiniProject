@@ -3,9 +3,11 @@ import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import "localstorage-polyfill";
+import axios from "axios";
 
 const DrawerContent = (props) => {
   const navigation = useNavigation();
+ 
   return (
     <SafeAreaView>
       <View>
@@ -30,8 +32,16 @@ const DrawerContent = (props) => {
           <Text
             style={Styles.drawerText}
             onPress={() => {
-              props.setLogged(false);
-              localStorage.clear();
+              let token = localStorage.getItem("token");
+              console.log(token);
+              axios.post("https://dev-api.pet-net.com.au/api/v1/auth/sign-out",{},{ headers: {
+                Authorization: `Bearer ${token}`,
+              }}).then(res=>{
+                if(res.status===200){
+                  props.setLogged(false);
+                  localStorage.clear();
+                }
+              })
             }}
           >
             Deconnexion

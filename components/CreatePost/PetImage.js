@@ -1,7 +1,9 @@
 import { View, Text, SafeAreaView } from "react-native";
+
 import React from "react";
 
-const PetImage = () => {
+const PetImage = ({setdata , data}) => {
+
   return (
     <SafeAreaView>
       <View className="py-10 px-5">
@@ -17,15 +19,10 @@ const PetImage = () => {
             <Text className="text-[#858585]">Add another photo</Text>
           </View>
         </View>
-      </View>
-      <View className="flex flex-row justify-center gap-5 items-center">
-        <View className="bg-[#04AF2F] color-white  items-center justify-center rounded-3xl py-3 px-16 ">
-          <Text className="text-white text-2xl  font-bold ">Previous</Text>
-        </View>
-        <View className="bg-[#04AF2F] color-white  items-center justify-center rounded-3xl py-3 px-20">
-          <Text className="text-white text-2xl  font-bold ">Next</Text>
+        <View>
         </View>
       </View>
+      
     </SafeAreaView>
   );
 };
