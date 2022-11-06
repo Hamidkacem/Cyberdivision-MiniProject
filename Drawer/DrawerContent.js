@@ -33,7 +33,6 @@ const DrawerContent = (props) => {
             style={Styles.drawerText}
             onPress={() => {
               let token = localStorage.getItem("token");
-              console.log(token);
               axios.post("https://dev-api.pet-net.com.au/api/v1/auth/sign-out",{},{ headers: {
                 Authorization: `Bearer ${token}`,
               }}).then(res=>{

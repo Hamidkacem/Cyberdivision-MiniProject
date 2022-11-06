@@ -5,34 +5,80 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PetInfo from "./PetInfo";
 import PetType from "./PetType";
 import SpecificInfo from "./SpecificInfo";
 import PetImage from "./PetImage";
+// import axios from "axios";
 
-const CreatePost = ({ navigation }) => {
+const CreatePost = (props) => {
   const [vue, setVue] = useState(1);
   const [data, setdata] = useState({
-    petType: "",
-    microshipId: "",
-    name: "",
-    breed: "",
-    dadBreed: "",
-    momBreed: "",
-    sex: "",
-    isDesexed: true,
-    age: "",
-    size: "",
-    veterinaryChecked: true,
-    isVaccinated: true,
-    coatLength: "",
-    color: "",
-    isInShelter: true,
-    care: "",
-    expectedAdultSize: "",
-    goodWith: "",
+    kind: "STANDARD",
+    title: "string",
+    description: "string",
+    price: 0,
+    adoptionFee: 0,
+    images: [
+      {
+        url: "https://www.pedigreedatabase.com/pictures/2635156.jpg",
+      },
+    ],
+    childImages: [
+      {
+        url: "string",
+      },
+    ],
+    parentImages: [
+      {
+        url: "string",
+      },
+    ],
+    pet: {
+      petType: "",
+      microshipId: "",
+      name: "",
+      breed: "",
+      dadBreed: "",
+      momBreed: "",
+      sex: "",
+      isDesexed: true,
+      age: "",
+      size: "",
+      veterinaryChecked: true,
+      isVaccinated: true,
+      coatLength: "",
+      color: "",
+      isInShelter: true,
+      care: "",
+      expectedAdultSize: "",
+      goodWith: "",
+    },
+
+    location: {
+      state: "string",
+      suburb: "string",
+    },
   });
+
+  const Post = () => {
+    // let token = localStorage.getItem("token");
+    //  console.log('==========>Post',data)
+    // axios
+    //   .post("https://dev-api.pet-net.com.au/api/v1/posts", data, {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   })
+    //   .then((res) => {
+    //     // console.log("user:=========> ", res.data);
+    //     setuserInfo(res.data);
+    //   });
+  };
+ 
+  useEffect(() => {
+  }, [data]);
 
   return (
     <SafeAreaView className="bg-white">
@@ -103,19 +149,18 @@ const CreatePost = ({ navigation }) => {
       </View>
       {/* Component */}
       <ScrollView className="h-5/6">
-        {vue === 1 && <PetType data={data} setdata={setdata} />}
+
+        {vue === 1 && <PetType  data={data} setdata={setdata} />}
         {vue === 2 && <PetInfo data={data} setdata={setdata} />}
         {vue === 3 && <SpecificInfo data={data} setdata={setdata} />}
         {vue == 4 && <PetImage data={data} setdata={setdata} />}
 
         <View className="">
           {vue === 1 ? (
-            <View className="py-8 px-8 ">
+            <View className="py-7 px-8 ">
               <TouchableOpacity onPress={() => setVue(vue + 1)}>
                 <View className="bg-[#04AF2F] color-white p-2 items-center justify-center rounded-full h-12 ">
-                  <Text className="text-white text-2xl  font-bold">
-                    Complete
-                  </Text>
+                  <Text className="text-white text-l  font-bold">Complete</Text>
                 </View>
               </TouchableOpacity>
             </View>
@@ -133,12 +178,17 @@ const CreatePost = ({ navigation }) => {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() =>
-                  vue === 4 ? navigation.navigate("Profile") : setVue(vue + 1)
+                  vue === 4
+                    ? (
+
+                     Post() ,
+                    props.navigation.navigate("Profile")
+                   ) : setVue(vue + 1)
                 }
                 className="w-2/4"
               >
                 <View className="bg-[#CCCCCC] color-white ml-3 items-center justify-center rounded-3xl  h-12 ">
-                  <Text className="text-white text-2xl  font-bold ">Next</Text>
+                  <Text className="text-white text-2xl  font-bold">Next</Text>
                 </View>
               </TouchableOpacity>
             </View>

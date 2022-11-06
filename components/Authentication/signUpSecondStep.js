@@ -1,4 +1,12 @@
-import { View, Text, SafeAreaView, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  ScrollView
+} from "react-native";
 import React, { useState, useEffect } from "react";
 
 const SignUpSecondStep = ({ navigation, route }) => {
@@ -9,14 +17,30 @@ const SignUpSecondStep = ({ navigation, route }) => {
   });
   const { state } = route.params;
 
-  useEffect(() => console.log("location", state), []);
+  useEffect(() => console.log("location", navigation), []);
 
   return (
     <SafeAreaView>
-      <View className=" py-4">
+      <ScrollView>
+      <View className="px-3 py-4 mt-5">
+        {/* //Image problem */}
+        <Image
+          className="justify-start"
+          source={require("../../assets/Arrow - Left.svg")}
+        />
         {/* Text and Close Button */}
-        <View>
-          <Text className="text-3xl font-bold p-3">Few steps to complete</Text>
+        <View className=" flex flex-row justify-between items-center">
+          <Text className="text-2xl font-bold p-3">Few steps to complete</Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.pop()
+            }}
+          >
+            <Image
+              className="justify-end"
+              source={require("../../assets/Close.png")}
+            />
+          </TouchableOpacity>
         </View>
         {/* Inputs State */}
         <Text className="text-[#858585] text-lg  pb-5">
@@ -66,20 +90,10 @@ const SignUpSecondStep = ({ navigation, route }) => {
           </Text>
         </View>
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
-  const style = StyleSheet.create({
-    // @supports (-webkit-touch-callout: none) {
-    // inputIOS: {
-    // }
-    // inputAndroid: {
-    //   ...t.pB0,
-    //   ...t.pT0,
-    //   ...t.textSm,
-    //   ...t.textGray900,
-    //   ...t.bgGray500,
-    // },
-  });
+
 };
 
 export default SignUpSecondStep;

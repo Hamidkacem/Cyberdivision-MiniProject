@@ -6,10 +6,11 @@ import CreatePost from "../components/CreatePost/CreatePost"
 
 
 const Stack = createNativeStackNavigator();
-const GlobalNavigation = (props) => {
+const GlobalNavigation = ({navigation,route}) => {
   return (
     <Stack.Navigator>
       <Stack.Screen
+      // initialParams={{ setLogged:router.params.setLogged}}
         options={{ headerShown: false }}
         name="Profile"
         component={Profile}

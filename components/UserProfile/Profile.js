@@ -6,48 +6,56 @@ import {
   ScrollView,
   StatusBar,
 } from "react-native";
-import React, { useState  , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Listings from "./Listings.js";
 import Settings from "./Settings.js";
-import ImagePicker from "../CreatePost/ImagePicker";
 import "localstorage-polyfill";
-import axios from 'axios'
+import axios from "axios";
 const Profile = ({ navigation, route }) => {
-const [userInfo,setuserInfo]=useState({})
-
+  const [userInfo, setuserInfo] = useState({
+    firstName: "",
+    lastName: "",
+    state: "",
+    suburb: "",
+    zipCode: "",
+  });
+  
   useEffect(() => {
+
     let token = localStorage.getItem("token");
-    console.log(token);
     axios
-      .get("https://dev-api.pet-net.com.au/api/v1/users", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) =>{
-        console.log('user: ',res.data);
-        setuserInfo(res.data)
-      });
-  },[]);
+    .get("https://dev-api.pet-net.com.au/api/v1/users", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      // console.log("user: ", res.data);
+      setuserInfo(res.data.profile);
+    });
+  }, []);
+  // let setLogged = route.params.setLogged;
   const [view, setView] = useState(false);
+
   return (
     <SafeAreaView className="h-screen bg-white py-2">
-      <StatusBar backgroundColor={"black"} />
-
-      <View className=" flex flex-start">
+            <StatusBar style="light" />
+      <View className=" flex">
         {/* Title */}
         <View className=" flex flex-row justify-warp gap-2 items-center text-center py-2">
           <View className="mt-3 p-4">
             <Image source={require("../../assets/El.png")} />
           </View>
           {/* user Container */}
-          <View className="mt-3">
+          <View className="mt-3 flex flex-warp">
             {/* Name User */}
-            <Text className="text-2xl font-bold">Karim Benmbarek</Text>
-            <Text className="text-[#858585] text-l flex flex-wrap ">
+            <Text className="text-l flex-warp font-bold">
+              {userInfo.firstName } {userInfo.lastName}
+            </Text>
+            <Text className="text-[#858585] text-xs  flex-wrap ">
               An experienced dogs breeder located
             </Text>
-            <Text className="text-[#858585] text-l flex flex-wrap ">
+            <Text className="text-[#858585] text-xs  flex-wrap ">
               in Melboune, VIC Test
             </Text>
           </View>
@@ -90,7 +98,7 @@ const [userInfo,setuserInfo]=useState({})
         {/* A Suivre  you need to fix this  */}
         {/* keyboardShouldPersistTaps="always" */}
         {/* <ScrollView  > */}
-        {view ? <Settings /> : <Listings />}
+        {view ? <Settings userInfo={userInfo} /> : <Listings />}
         {/* </ScrollView> */}
       </View>
     </SafeAreaView>

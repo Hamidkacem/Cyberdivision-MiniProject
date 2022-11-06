@@ -12,15 +12,11 @@ import "localstorage-polyfill";
 
 const Drawer = createDrawerNavigator();
 function App(props) {
-  console.log("Aa", Drawer.Navigator);
   return (
     <Drawer.Navigator
       screenOption={{
         headerShow: true,
-        headerStyle: {
-          backgroundColor: "black",
-        },
-        headerTintColor: "#fff",
+        headerTintColor: "#04AF2F",
         fontWeight: "bold",
       }}
       drawerContent={(x) => (
@@ -28,15 +24,18 @@ function App(props) {
       )}
     >
       <Drawer.Screen
-        name="Petnet"
-        // screenOption={{
-        //   headerShow: true,
-        //   headerStyle: {
-        //     backgroundColor: "#E6FEEC",
-        //   },
-        //   headerTintColor: "#fff",
-        //   fontWeight: "bold",
-        // }}
+        initialParams={{ setLogged: props.setLogged }}
+        name="Home"
+        options={{
+          title: "  Petnet  ",
+          headerTintColor: "#04AF2F",
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+         
+            fontWeight: "bold",
+
+          },
+        }}
         component={GlobalNavigation}
       />
     </Drawer.Navigator>
@@ -75,7 +74,6 @@ export default () => {
   const [logged, setLogged] = useState(false);
   useEffect(() => {
     let x = localStorage.getItem("token");
-    console.log(x);
     if (x) {
       setLogged(true);
     }
